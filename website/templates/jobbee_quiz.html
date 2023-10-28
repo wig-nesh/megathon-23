@@ -7,36 +7,123 @@
 
 <h2>Form</h2>
 
-<form action="/submit" method="post">
+<form action="/submit" method="post" onsubmit="return validateForm()">
     <label for="link">Link:</label><br>
     <input type="url" id="link" name="link"><br><br>
 
     <fieldset>
         <legend>Questions</legend>
         <div id="questions">
-            <!-- Repeat this block for each question -->
             <div class="question">
-                <p>Question 1: You discover your colleague might be leaking confidential company data for personal gain. How do you handle this situation?</p>
-                <input type="radio" id="q1o1" name="q1" value="option1">
-                <label for="q1o1">Confront the colleague directly to address and resolve the breach.</label><br>
-                <input type="radio" id="q1o2" name="q1" value="option2">
-                <label for="q1o2">Ignore the situation to avoid conflict or potential negative repercussions.</label><br>
-                <input type="radio" id="q1o3" name="q1" value="option3">
-                <label for="q1o3">Hold the information and observe for further evidence before taking action.</label><br>
-            </div>
-            <!-- End of question block -->
-            <!-- Repeat this block for each question -->
-            <div class="question">
-                <p>Question 2: You discover your colleague might be leaking confidential company data for personal gain. How do you handle this situation?</p>
-                <input type="radio" id="q2o1" name="q1" value="option1">
-                <label for="q1o1">Confront the colleague directly to address and resolve the breach.</label><br>
-                <input type="radio" id="q2o2" name="q1" value="option2">
-                <label for="q1o2">Ignore the situation to avoid conflict or potential negative repercussions.</label><br>
-                <input type="radio" id="q2o3" name="q1" value="option3">
-                <label for="q1o3">Hold the information and observe for further evidence before taking action.</label><br>
-            </div>
-            <!-- End of question block -->
+            <p>Question 1: An old employee of the company that was close to everyone has died and the company is low on funds. What do you think would be optimal for morale and the company?</p>
+            <input type="number" id="q1o1" name="q1" value="option1" min="1" max="3">
+            <label for="q1o1">Leave employees two hours early to attend the funeral to get closure.</label><br>
+            <input type="number" id="q1o2" name="q1" value="option2" min="1" max="3">
+            <label for="q1o2">Ask your higher ups to get something subtle but meaningful for the office in remembrance of the employee</label><br>
+            <input type="number" id="q1o3" name="q1" value="option3" min="1" max="3">
+            <label for="q1o3">Push for grief counseling for employees.</label><br>
         </div>
+
+        <div class="question">
+            <p>Question 2: Should companies be obligated to have diversity quotas in hiring and promotions?</p>
+            <input type="number" id="q2o1" name="q2" value="option1" min="1" max="3">
+            <label for="q2o1">Yes, diversity quotas are necessary to address systemic biases and inequalities, ensuring underrepresented groups have a fair chance at opportunities.</label><br>
+            <input type="number" id="q2o2" name="q2" value="option2" min="1" max="3">
+            <label for="q2o2">No, hiring and promotions should be based on merit and qualifications, and promotions.</label><br>
+            <input type="number" id="q2o3" name="q2" value="option3" min="1" max="3">
+            <label for="q2o3">Companies should focus on proactive diversity initiatives but avoid strict quotas, instead setting aspirational targets to maintain a balance between merit-based hiring and diversity goals.</label><br>
+        </div>
+
+        <div class="question">
+            <p>Question 3: Should employees be allowed to discuss their salaries openly within a company?</p>
+            <input type="number" id="q3o1" name="q3" value="option1" min="1" max="3">
+            <label for="q3o1">Yes, salary transparency is essential to identify and rectify wage gaps, promoting fairness and equality in the workplace.</label><br>
+            <input type="number" id="q3o2" name="q3" value="option2" min="1" max="3">
+            <label for="q3o2">No, salary discussions can lead to resentment and hostility among employees, potentially undermining team dynamics and company culture.</label><br>
+            <input type="number" id="q3o3" name="q3" value="option3" min="1" max="3">
+            <label for="q3o3">Salary discussions should be permitted, but not encouraged, as open discussions can create unnecessary tension and distractions from work-related tasks.</label><br>
+        </div>
+
+        <div class="question">
+            <p>Question 4: Is it ethical for companies to engage in aggressive tax avoidance strategies to minimize their tax liability?</p>
+            <input type="number" id="q4o1" name="q4" value="option1" min="1" max="3">
+            <label for="q4o1">Yes, top executives have unique responsibilities and decision-making power that justify their higher compensation.</label><br>
+            <input type="number" id="q4o2" name="q4" value="option2" min="1" max="3">
+            <label for="q4o2">No, excessive executive compensation contributes to income inequality within the company and is detrimental to employee morale.</label><br>
+            <input type="number" id="q4o3" name="q4" value="option3" min="1" max="3">
+            <label for="q4o3">Executive compensation should be tied to company performance, ensuring that high pay is only justified by exceptional results.</label><br>
+        </div>
+
+        <div class="question">
+            <p>Question 5: How would you approach implementing diversity and inclusion initiatives in the workplace?</p>
+            <input type="number" id="q5o1" name="q5" value="option1" min="1" max="3">
+            <label for="q5o1">Create forums and platforms for open discussions and feedback to foster an inclusive workplace culture.</label><br>
+            <input type="number" id="q5o2" name="q5" value="option2" min="1" max="3">
+            <label for="q5o2">Form a committee comprising employees to gather feedback and propose solutions.</label><br>
+            <input type="number" id="q5o3" name="q5" value="option3" min="1" max="3">
+            <label for="q5o3">Provide frequent specialized training to promote cultural sensitivity and diversity awareness among existing employees.</label><br>
+        </div>
+
+        <div class="question">
+            <p>Question 6: Your team's productivity has declined. What steps would you take to address this?</p>
+            <input type="number" id="q6o1" name="q6" value="option1" min="1" max="3">
+            <label for="q6o1">Initiate one-on-one discussions to understand individual challenges affecting productivity.</label><br>
+            <input type="number" id="q6o2" name="q6" value="option2" min="1" max="3">
+            <label for="q6o2">Conduct a team-wide workshop to identify and collectively solve productivity barriers.</label><br>
+            <input type="number" id="q6o3" name="q6" value="option3" min="1" max="3">
+            <label for="q6o3">Encourage open discussions in team meetings to pinpoint challenges and collaboratively find solutions.</label><br>
+        </div>
+
+        <div class="question">
+            <p>Question 7: You encounter a situation in a project where you must compromise on quality to meet the deadline. What action would you take?</p>
+            <input type="number" id="q7o1" name="q7" value="option1" min="1" max="3">
+            <label for="q7o1">Prioritize quality and request a deadline extension to ensure the delivery meets high standards.</label><br>
+            <input type="number" id="q7o2" name="q7" value="option2" min="1" max="3">
+            <label for="q7o2">Focus on meeting the deadline by adjusting the scope and accepting a potential compromise in quality.</label><br>
+            <input type="number" id="q7o3" name="q7" value="option3" min="1" max="3">
+            <label for="q7o3">Communicate the challenge to stakeholders and collaboratively adjust expectations.</label><br>
+        </div>
+
+        <div class="question">
+            <p>Question 8: A project is facing difficulties in meeting deadlines during a busy time for the company. How would you address this situation?</p>
+            <input type="number" id="q8o1" name="q8" value="option1" min="1" max="3">
+            <label for="q8o1">Review and adjust project timelines and objectives to accommodate challenges.</label><br>
+            <input type="number" id="q8o2" name="q8" value="option2" min="1" max="3">
+            <label for="q8o2">Reallocate resources or staff to crucial tasks to expedite project progress.</label><br>
+            <input type="number" id="q8o3" name="q8" value="option3" min="1" max="3">
+            <label for="q8o3">Conduct a comprehensive review of project workflows and processes to optimize efficiency.</label><br>
+        </div>
+
+        <div class="question">
+            <p>Question 9: The company aims to revamp its culture to foster innovation and collaboration. How would you approach this?</p>
+            <input type="number" id="q9o1" name="q9" value="option1" min="1" max="3">
+            <label for="q9o1">Encourage cross-departmental collaboration and idea sharing.</label><br>
+            <input type="number" id="q9o2" name="q9" value="option2" min="1" max="3">
+            <label for="q9o2">Implement a flexible and open-door policy to facilitate better communication.</label><br>
+            <input type="number" id="q9o3" name="q9" value="option3" min="1" max="3">
+            <label for="q9o3">Create internal mentorship programs to foster knowledge transfer and skill development.</label><br>
+        </div>
+
+        <div class="question">
+            <p>Question 10: Several key employees have resigned. How would you manage the situation to ensure minimal disruption?</p>
+            <input type="number" id="q10o1" name="q10" value="option1" min="1" max="3">
+            <label for="q10o1">Offer transitioning support and knowledge transfer to minimize disruption.</label><br>
+            <input type="number" id="q10o2" name="q10" value="option2" min="1" max="3">
+            <label for="q10o2">Redistribute tasks and responsibilities among existing team members to cover gaps.</label><br>
+            <input type="number" id="q10o3" name="q10" value="option3" min="1" max="3">
+            <label for="q10o3">Implement retention strategies and proactive measures to prevent further resignations.</label><br>
+        </div>
+
+        <div class="question">
+            <p>Question 11: The company aims to enhance its corporate social responsibility. How would you approach this?</p>
+            <input type="number" id="q11o1" name="q11" value="option1" min="1" max="3">
+            <label for="q11o1">Invest in sustainability initiatives and environmentally friendly practices.</label><br>
+            <input type="number" id="q11o2" name="q11" value="option2" min="1" max="3">
+            <label for="q11o2">Engage in community outreach programs and charitable contributions.</label><br>
+            <input type="number" id="q11o3" name="q11" value="option3" min="1" max="3">
+            <label for="q11o3">Develop employee volunteer programs and support their engagement in social causes.</label><br>
+        </div>
+
     </fieldset><br>
 
     <label for="dropdown">Choose an option:</label><br>
@@ -49,6 +136,21 @@
 
     <input type="submit" value="Submit">
 </form>
+
+<script>
+function validateForm() {
+  for (let i = 1; i <= 11; i++) {
+    let qio1 = document.getElementById(`q${i}o1`).value;
+    let qio2 = document.getElementById(`q${i}o2`).value;
+    let qio3 = document.getElementById(`q${i}o3`).value;
+
+    if (qio1 === qio2 || qio1 === qio3 || qio2 === qio3) {
+      alert(`Please select different numbers for each option in question ${i}.`);
+      return false;
+    }
+  }
+}
+</script>
 
 </body>
 </html>

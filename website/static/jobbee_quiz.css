@@ -36,8 +36,9 @@ input[type="submit"] {
     cursor:pointer;
 }
 
-input[type="radio"] {
-    margin: 10px 5px;
+input[type="number"] {
+    margin: 10px 0px;
+    width: 4%;
 }
 
 label {
