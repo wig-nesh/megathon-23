@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login.css') }}">
+</head>
+<body>
+
+<h2>JobberJobbee:)</h2>
+
+<form action="/login" method="post">
+    <input type="radio" id="jobber" name="accountType" value="0">
+    <label for="jobber">Jobber (I want to hire)</label><br>
+    <input type="radio" id="jobbee" name="accountType" value="1">
+    <label for="jobbee">Jobbee (I'm looking for jobs)</label><br>
+    <label for="username">Username:</label><br>
+    <input type="text" id="username" name="username"><br>
+    <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>

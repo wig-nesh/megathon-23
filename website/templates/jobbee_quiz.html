@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='jobbee_quiz.css') }}">
+</head>
+<body>
+
+<h2>Form</h2>
+
+<form action="/submit" method="post">
+    <label for="link">Link:</label><br>
+    <input type="url" id="link" name="link"><br><br>
+
+    <fieldset>
+        <legend>Questions</legend>
+        <div id="questions">
+            <!-- Repeat this block for each question -->
+            <div class="question">
+                <p>Question 1: You discover your colleague might be leaking confidential company data for personal gain. How do you handle this situation?</p>
+                <input type="radio" id="q1o1" name="q1" value="option1">
+                <label for="q1o1">Confront the colleague directly to address and resolve the breach.</label><br>
+                <input type="radio" id="q1o2" name="q1" value="option2">
+                <label for="q1o2">Ignore the situation to avoid conflict or potential negative repercussions.</label><br>
+                <input type="radio" id="q1o3" name="q1" value="option3">
+                <label for="q1o3">Hold the information and observe for further evidence before taking action.</label><br>
+            </div>
+            <!-- End of question block -->
+            <!-- Repeat this block for each question -->
+            <div class="question">
+                <p>Question 2: You discover your colleague might be leaking confidential company data for personal gain. How do you handle this situation?</p>
+                <input type="radio" id="q2o1" name="q1" value="option1">
+                <label for="q1o1">Confront the colleague directly to address and resolve the breach.</label><br>
+                <input type="radio" id="q2o2" name="q1" value="option2">
+                <label for="q1o2">Ignore the situation to avoid conflict or potential negative repercussions.</label><br>
+                <input type="radio" id="q2o3" name="q1" value="option3">
+                <label for="q1o3">Hold the information and observe for further evidence before taking action.</label><br>
+            </div>
+            <!-- End of question block -->
+        </div>
+    </fieldset><br>
+
+    <label for="dropdown">Choose an option:</label><br>
+    <select id="dropdown" name="dropdown">
+        <option value="option1">Tech</option>
+        <option value="option2">HR</option>
+        <option value="option3">Marketing</option>
+        <option value="option4">Finance</option>
+    </select><br><br>
+
+    <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>
