@@ -1,13 +1,26 @@
 from flask import Flask, redirect, url_for, request, render_template
+from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
+import pandas as pd
+import numpy as np
+
+uri = "mongodb+srv://vighneshvembaar:3HvgpBVcYXsu3VUM@jobberjobbee.jg4fczh.mongodb.net/?retryWrites=true&w=majority"
 
 app = Flask(__name__)
-# client = MongoClient('mongodb://localhost:27017/')  # connect to your MongoDB server
-# db = client['your_database']  # replace 'your_database' with your database name
-# collection = db['your_collection']  # replace 'your_collection' with your collection name
+client = MongoClient(uri, server_api=ServerApi('1'))  # connect to your MongoDB server
+db = client['jobberjobbee']  # replace 'your_database' with your database name
+collection = db['responses']  # replace 'your_collection' with your collection name
+try:
+    client.admin.command('ping')
+    print("Pinged your deployment. You successfully connected to MongoDB!")
+except Exception as e:
+    print("@@" + str(e) + "@@")
+
 
 @app.route('/')
 def home():
     return render_template("login.html")
+
 
 @app.route('/login', methods=['POST'])
 def login_post():
@@ -19,6 +32,7 @@ def login_post():
         accountType = 'Jobbee'
     return redirect(url_for('login_get', userName=username, accountType=accountType))
 
+
 @app.route('/login/<userName>/<accountType>')
 def login_get(accountType, userName):
     if accountType == 'Jobber':
@@ -26,9 +40,11 @@ def login_get(accountType, userName):
     elif accountType == 'Jobbee':
         return redirect(url_for('jobbee_quiz', userName=userName))
 
+
 @app.route('/<userName>/Jobber')
 def jobber_home(userName):
     return render_template("jobber_home.html")
+
 
 @app.route('/create_job', methods=['GET', 'POST'])
 def create_job():
@@ -37,34 +53,76 @@ def create_job():
         pass
     return render_template("create_job.html")
 
+
 @app.route('/review_applications')
 def review_applications():
     # fetch data from MongoDB and pass to template
     return render_template("review_applications.html")
 
+
 @app.route('/<userName>/Jobbee')
 def jobbee_quiz(userName):
     return render_template("jobbee_quiz.html")
 
-# @app.route('/submit', methods=['POST'])
-# def submit():
-#     link = request.form.get('link')
-#     q1 = request.form.get('q1')
-#     dropdown = request.form.get('dropdown')
-#     # add more variables here for the rest of your questions
-#
-#     # create a document with the form data
-#     document = {
-#         'link': link,
-#         'q1': q1,
-#         'dropdown': dropdown,
-#         # add more fields here for the rest of your questions
-#     }
-#
-#     # insert the document into the MongoDB collection
-#     collection.insert_one(document)
-#
-#     return 'Form submitted successfully!'
+
+@app.route('/submit', methods=['POST'])
+def submit():
+    link = request.form.get('link')
+    dropdown = request.form.get('dropdown')
+    # add more variables here for the rest of your questions
+
+    # create a document with the form data
+    document = {
+        'link': link,
+        'dropdown': dropdown,
+        'communication': 0,
+        'leadership': 0,
+        'team_work': 0,
+        'adaptability': 0,
+        'problem_solving': 0,
+        'interpersonal_skill': 0,
+        'loyalty': 0
+    }
+
+    df = pd.read_csv(r"C:\Users\vigne\Downloads\dataset_doc - Sheet1 - Copy.csv")
+
+    for i in range(12):
+        for j in range(3):
+            qxoy = request.form.get(f'q{i + 1}o{j + 1}')
+            if qxoy == '1':
+                document['communication'] += df['communication'][(i*3)+j] * 3
+                document['leadership'] += df['leadership'][(i*3)+j] * 3
+                document['team_work'] += df['team_work'][(i*3)+j] * 3
+                document['adaptability'] += df['adaptability'][(i*3)+j] * 3
+                document['problem_solving'] += df['problem_solving'][(i*3)+j] * 3
+                document['interpersonal_skill'] += df['interpersonal_skill'][(i*3)+j] * 3
+                document['loyalty'] += df['loyalty'][(i*3)+j] * 3
+            elif qxoy == '2':
+                document['communication'] += df['communication'][(i*3)+j] * 2
+                document['leadership'] += df['leadership'][(i*3)+j] * 2
+                document['team_work'] += df['team_work'][(i*3)+j] * 2
+                document['adaptability'] += df['adaptability'][(i*3)+j] * 2
+                document['problem_solving'] += df['problem_solving'][(i*3)+j] * 2
+                document['interpersonal_skill'] += df['interpersonal_skill'][(i*3)+j] * 2
+                document['loyalty'] += df['loyalty'][(i*3)+j] * 2
+            elif qxoy == '3':
+                document['communication'] += df['communication'][(i*3)+j]
+                document['leadership'] += df['leadership'][(i*3)+j]
+                document['team_work'] += df['team_work'][(i*3)+j]
+                document['adaptability'] += df['adaptability'][(i*3)+j]
+                document['problem_solving'] += df['problem_solving'][(i*3)+j]
+                document['interpersonal_skill'] += df['interpersonal_skill'][(i*3)+j]
+                document['loyalty'] += df['loyalty'][(i*3)+j]
+
+
+    # insert the document into the MongoDB collection
+    for key, value in document.items():
+        if isinstance(value, np.int64):
+            document[key] = int(value)/6
+    collection.insert_one(document)
+
+    return 'Form submitted successfully!'
+
 
 if __name__ == '__main__':
     app.run()

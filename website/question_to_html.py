@@ -18,11 +18,11 @@ def csv_to_html(csv_file):
         html += f'''
         <div class="question">
             <p>Question {i + 1}: {row[0]}</p>
-            <input type="number" id="q{i + 1}o1" name="q{i + 1}" value="option1" min="1" max="3">
+            <input type="number" id="q{i + 1}o1" name="q{i + 1}o1" value="option1" min="1" max="3">
             <label for="q{i + 1}o1">{row[1]}</label><br>
-            <input type="number" id="q{i + 1}o2" name="q{i + 1}" value="option2" min="1" max="3">
+            <input type="number" id="q{i + 1}o2" name="q{i + 1}o2" value="option2" min="1" max="3">
             <label for="q{i + 1}o2">{row[2]}</label><br>
-            <input type="number" id="q{i + 1}o3" name="q{i + 1}" value="option3" min="1" max="3">
+            <input type="number" id="q{i + 1}o3" name="q{i + 1}o3" value="option3" min="1" max="3">
             <label for="q{i + 1}o3">{row[3]}</label><br>
         </div>
         '''
