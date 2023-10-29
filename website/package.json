@@ -1,0 +1,254 @@
+{
+   "public_identifier":"anirudha-ramesh-1366a2164",
+   "profile_pic_url":"https://s3.us-west-000.backblazeb2.com/proxycurl/person/anirudha-ramesh-1366a2164/profile?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0004d7f56a0400b0000000001%2F20231028%2Fus-west-000%2Fs3%2Faws4_request&X-Amz-Date=20231028T115453Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=946556cd631e6f09e520ddaf22261ce15f3e26d95ddd44c62a884476dc3dc3f8",
+   "background_cover_image_url":"None",
+   "first_name":"Anirudha",
+   "last_name":"Ramesh",
+   "full_name":"Anirudha Ramesh",
+   "follower_count":653,
+   "occupation":"Graduate Research Assistant at Carnegie Mellon University",
+   "headline":"Graduate Student in Robotics/Computer Vision/ML @ CMU | Undergraduate in Computer Science Engineering @ IIIT-Hyderabad",
+   "summary":"Engineer and Researcher with a passion in Machine Learning, Computer Vision, and everything on the path towards AGI. Excited to work on interesting research problems, as well as, creating deploy-able real-world solutions.\n\nExperience Areas : \nComputer Vision (Detection/Tracking, Segmentation, Streaming Perception, Few Shot Learning, Domain Adaptation, Multi-Spectral Vision, Generative AI, AR-VR)\nMachine Learning (Deep Learning, Optimization)\nRobotics (SLAM, Field Robotics, Embodied AI)\n\nWebsite : https://anirudharamesh.github.io/",
+   "country":"US",
+   "country_full_name":"United States of America",
+   "city":"Pittsburgh",
+   "state":"Pennsylvania",
+   "experiences":[
+      {
+         "starts_at":{
+            "day":1,
+            "month":9,
+            "year":2021
+         },
+         "ends_at":"None",
+         "company":"Carnegie Mellon University",
+         "company_linkedin_profile_url":"None",
+         "title":"Graduate Research Assistant",
+         "description":"Work with Prof. Jeff Schneider, Prof. Christoph Mertz, and National Robotics Engineering Corporation (NREC) in :-\n\n- Designing and deploying a first of a kind perception system capable of functioning 24/7, utilizing multi-spectral vision inputs across various modalities. Lead team for object detection and semantic segmentation, and collaborate with teams leading other components for general integration and system building.\n- Transforming perception systems equipped to work in structured, well-lit environments to unstructured environments with variable lighting by developing novel algorithms for domain adaptation and generalization so as to create more adaptable robots and AI-systems.",
+         "location":"Pittsburgh, Pennsylvania, United States",
+         "logo_url":"https://media.licdn.com/dms/image/C560BAQH0rMqWuDcNzA/company-logo_400_400/0/1656670432353?e=1704931200&v=beta&t=DB6gtZ1n6nrC47MCrERjus2yAeVFDWQb5lwjGVwNKno"
+      },
+      {
+         "starts_at":{
+            "day":1,
+            "month":5,
+            "year":2019
+         },
+         "ends_at":{
+            "day":31,
+            "month":5,
+            "year":2021
+         },
+         "company":"International Institute of Information Technology",
+         "company_linkedin_profile_url":"None",
+         "title":"Undergraduate Research Assistant",
+         "description":"Primarily worked on Monocular Visual SLAM in dynamic on-road scenes. Developed a novel solution to the intractable relative scale problem in Monocular SLAM, proposing both a vision as well as optimization based solution. \nWork accepted in IEEE Intelligent Vehicle Symposium - 2020, and VISIGRAPP (VISAPP), 2021.\nMentored new lab inductees on computer vision, deep learning systems, and optimization.\nAdditionally, worked on Probabilistic Collision Avoidance for Multiple Robots. Work accepted at IV-2021.",
+         "location":"Hyderabad, Telangana, India",
+         "logo_url":"https://media.licdn.com/dms/image/D4D0BAQE2qHzPqkwvGA/company-logo_400_400/0/1662117124017?e=1704931200&v=beta&t=CLpVVOJ8wWb5K1DMTKmAZR6sCtE7rV-T5OV1X9FPSA4"
+      },
+      {
+         "starts_at":{
+            "day":1,
+            "month":1,
+            "year":2021
+         },
+         "ends_at":{
+            "day":31,
+            "month":7,
+            "year":2021
+         },
+         "company":"Adobe",
+         "company_linkedin_profile_url":"https://www.linkedin.com/company/adobe/",
+         "title":"Research Intern",
+         "description":"Discovered and solved biases in existing solutions, and in the structuring of prominent datasets for Few Shot\nSegmentation (FSS) Adobe MDSR team. Upon solving for these biases, we add to the performance of all tested underlying networks by ∼ 5% mIoU. \nPublished at NeurIPS 2021 along with a new dataset (TOSS) for nuanced evaluation of FSS.",
+         "location":"Noida, Uttar Pradesh, India",
+         "logo_url":"https://media.licdn.com/dms/image/C560BAQFrtK-ioO1rsQ/company-logo_400_400/0/1590681827578?e=1704931200&v=beta&t=9jUbnPpdSivyWDF6y9uyPOffoBZU_XAncaST6bt72b4"
+      }
+   ],
+   "education":[
+      {
+         "starts_at":{
+            "day":1,
+            "month":8,
+            "year":2021
+         },
+         "ends_at":{
+            "day":31,
+            "month":8,
+            "year":2023
+         },
+         "field_of_study":"Computer Science",
+         "degree_name":"Masters in Robotics",
+         "school":"Carnegie Mellon University",
+         "school_linkedin_profile_url":"None",
+         "description":"None",
+         "logo_url":"https://media.licdn.com/dms/image/C560BAQH0rMqWuDcNzA/company-logo_400_400/0/1656670432353?e=1704931200&v=beta&t=DB6gtZ1n6nrC47MCrERjus2yAeVFDWQb5lwjGVwNKno",
+         "grade":"4.12/4",
+         "activities_and_societies":"None"
+      },
+      {
+         "starts_at":{
+            "day":1,
+            "month":8,
+            "year":2017
+         },
+         "ends_at":{
+            "day":31,
+            "month":5,
+            "year":2021
+         },
+         "field_of_study":"Computer Science",
+         "degree_name":"Bachelor of Technology - BTech",
+         "school":"International Institute of Information Technology Hyderabad (IIITH)",
+         "school_linkedin_profile_url":"None",
+         "description":"None",
+         "logo_url":"https://media.licdn.com/dms/image/D4D0BAQE2qHzPqkwvGA/company-logo_400_400/0/1662117124017?e=1704931200&v=beta&t=CLpVVOJ8wWb5K1DMTKmAZR6sCtE7rV-T5OV1X9FPSA4",
+         "grade":"9.32/10",
+         "activities_and_societies":"None"
+      }
+   ],
+   "languages":[
+
+   ],
+   "accomplishment_organisations":[
+
+   ],
+   "accomplishment_publications":[
+
+   ],
+   "accomplishment_honors_awards":[
+
+   ],
+   "accomplishment_patents":[
+
+   ],
+   "accomplishment_courses":[
+
+   ],
+   "accomplishment_projects":[
+
+   ],
+   "accomplishment_test_scores":[
+
+   ],
+   "volunteer_work":[
+
+   ],
+   "certifications":[
+
+   ],
+   "connections":"None",
+   "people_also_viewed":[
+      {
+         "link":"https://www.linkedin.com/in/soumith-udatha",
+         "name":"Soumith Udatha",
+         "summary":"Research Assistant @ Carnegie Mellon University | Robotics and Machine Learning",
+         "location":"None"
+      },
+      {
+         "link":"https://www.linkedin.com/in/nishantmohanty",
+         "name":"Nishant Mohanty",
+         "summary":"MS Robotics @ CMU | B.Tech EI @ NIT Rourkela",
+         "location":"None"
+      },
+      {
+         "link":"https://www.linkedin.com/in/anuragxel",
+         "name":"Anurag Ghosh",
+         "summary":"PhD @ CMU Robotics. Ex-Microsoft Research.",
+         "location":"None"
+      },
+      {
+         "link":"https://www.linkedin.com/in/akshayakms",
+         "name":"Akshaya Srinivasan",
+         "summary":"Seeking Robotics Full-time roles | MS Robotics at Carnegie Mellon University | Research Assistant @ Biorobotics Lab | J N TATA Scholar",
+         "location":"None"
+      },
+      {
+         "link":"https://www.linkedin.com/in/sanjanagunna",
+         "name":"Sanjana Gunna",
+         "summary":"MS in Computer Vision @ CMU",
+         "location":"None"
+      },
+      {
+         "link":"https://www.linkedin.com/in/sudharshansuresh",
+         "name":"Sudharshan Suresh",
+         "summary":"PhD candidate at CMU Robotics | Part-time researcher at Meta AI",
+         "location":"None"
+      },
+      {
+         "link":"https://www.linkedin.com/in/soumya-vadlamannati",
+         "name":"Soumya Vadlamannati",
+         "summary":"Bloomberg AI Engineer | MSCS @ CMU",
+         "location":"None"
+      },
+      {
+         "link":"https://www.linkedin.com/in/pranay-gupta-825713134",
+         "name":"Pranay Gupta",
+         "summary":"MS in Robotics",
+         "location":"None"
+      },
+      {
+         "link":"https://www.linkedin.com/in/prachi-garg-192276135",
+         "name":"Prachi Garg",
+         "summary":"MS in Robotics @ Carnegie Mellon University",
+         "location":"None"
+      },
+      {
+         "link":"https://www.linkedin.com/in/sarthak-bhagat-1b5206135",
+         "name":"Sarthak Bhagat",
+         "summary":"MS Robotics, CMU, ex:- USC, SUTD, Preimage, IIITD",
+         "location":"None"
+      }
+   ],
+   "recommendations":[
+
+   ],
+   "activities":[
+
+   ],
+   "similarly_named_profiles":[
+
+   ],
+   "articles":[
+
+   ],
+   "groups":[
+
+   ],
+   "skills":[
+      "Artificial Intelligence (AI)",
+      "C++",
+      "Python (Programming Language)",
+      "PyTorch",
+      "Data Structures",
+      "TensorFlow",
+      "Deep Neural Networks (DNN)",
+      "Deep Learning",
+      "Computer Vision",
+      "Machine Learning",
+      "Robotics"
+   ],
+   "inferred_salary":{
+      "min":"None",
+      "max":20000.0
+   },
+   "gender":"None",
+   "birth_date":"None",
+   "industry":"None",
+   "extra":{
+      "github_profile_id":"None",
+      "twitter_profile_id":"None",
+      "facebook_profile_id":"None"
+   },
+   "interests":[
+
+   ],
+   "personal_emails":[
+
+   ],
+   "personal_numbers":[
+
+   ]
+}
+
+
