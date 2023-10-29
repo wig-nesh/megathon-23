@@ -3,3 +3,4 @@ pymongo.mongo_client
 pymongo.server_api
 pandas
 numpy
+sklearn
