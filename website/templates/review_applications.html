@@ -8,7 +8,7 @@
         <h2>Job {{ loop.index }}</h2>
         <div id="cosine_content_{{ loop.index }}">
             {% for item in data %}
-                <p><a href="{{ item.links }}">{{ item.type }}</a></p>
+                <p><a href="{{ item.links }}">{{ item.name }}</a></p>
             {% endfor %}
         </div>
     {% endfor %}

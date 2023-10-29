@@ -109,7 +109,7 @@ def jobber_home(userName):
 def create_job():
     if request.method == 'POST':
         # Handle form submission here
-        username = request.form.get('userName')  # Get the username from the form
+        username = temp  # Get the username from the form
         job_title = request.form.get('job_title')
         job_description = request.form.get('job_description')
         job_type = request.form.get('type')
@@ -131,17 +131,18 @@ def create_job():
             new_X = vectorizer.transform(new_job_description)
             predicted_scores = model.predict(new_X)
             ans.append(predicted_scores)
+        print(ans)
         # Create a dictionary with the job information
         job_data = {
             'job_title': job_title,
             'job_description': job_description,
-            'Communication' : ans[0],
-            'Leadership' : ans[1],
-            'Team Work' : ans[2],
-            'Adaptability' : ans[3],
-            'Problem Solving' : ans[4],
-            'Interpersonal Skills' : ans[5],
-            'Loyalty' : ans[6]
+            'Communication' : ans[0][0],
+            'Leadership' : ans[1][0],
+            'Team Work' : ans[2][0],
+            'Adaptability' : ans[3][0],
+            'Problem Solving' : ans[4][0],
+            'Interpersonal Skills' : ans[5][0],
+            'Loyalty' : ans[6][0]
 
             # Add more fields for job information as needed
         }
@@ -181,15 +182,16 @@ def review_applications():
             b.append(np.dot(k, a) / (norm(k) * norm(a)))
         outputs.append({'cosine': b,
                         'links': i['link'],
-                        'type': i['dropdown']})
+                        'type': i['dropdown'],
+                        'name': i['name']})
 
-    print(outputs)
+    # print(outputs)
     sorted_data = []
     for i in range(len(outputs[0]['cosine'])):
         # Sort by i-th cosine similarity
         outputs.sort(key=lambda w: w['cosine'][i], reverse=True)
         sorted_data.append(outputs.copy())
-    print(sorted_data)
+    # print(sorted_data)
 
     # return sorted_data
     return render_template("review_applications.html", sorted_data=sorted_data)
@@ -197,20 +199,20 @@ def review_applications():
 
 @app.route('/<userName>/Jobbee')
 def jobbee_quiz(userName):
-    return render_template("jobbee_quiz.html")
+    return render_template("jobbee_quiz.html", userName=userName)
 
 @app.route('/submit', methods=['POST'])
 def submit():
     link = request.form.get('link')
     dropdown = request.form.get('dropdown')
-    type = request.form.get('type')
+    userName = request.form.get('userName')
     # add more variables here for the rest of your questions
 
     # create a document with the form data
     document = {
+        'name': userName,
         'link': link,
         'dropdown': dropdown,
-        'type': type,
         'communication': 0,
         'leadership': 0,
         'team_work': 0,
