@@ -59,15 +59,63 @@ def jobber_home(userName):
 
     return render_template("jobber_home.html")
 
+# @app.route('/create_job')
+# def create_job():
+#         username = temp  # Get the username from the form
+#         job_title = request.form.get('job_title')
+#         job_description = request.form.get('job_description')
+#         job_type = request.form.get('job_type')
+#         # Extract more job information from the form
+#         train = pd.read_csv(r'\doc_test.csv')
+#         train['text'] = train['text'].str.lower()
+#         train['text'] = train['text'].replace('[^a-zA-Z0-9]', ' ', regex=True)
+#         vectorizer = TfidfVectorizer()
+#         X = vectorizer.fit_transform(train['text'])
+#         cats = ['communication', 'leadership', 'team_work', 'adaptability', 'problem_solving', 'interpersonal_skill',
+#                 'loyalty']
+#         test_text=job_description
+#         ans = []
+#         for category in cats:
+#             X_train, X_test, y_train, y_test = train_test_split(X, train[category], test_size=0.4, random_state=42)
+#             model = LinearRegression()
+#             model.fit(X_train, y_train)
+#             new_job_description = [job_description]
+#             new_X = vectorizer.transform(new_job_description)
+#             predicted_scores = model.predict(new_X)
+#
+#             ans.append(predicted_scores)
+#         # Create a dictionary with the job information
+#         job_data = {
+#             'job_title': job_title,
+#             'job_description': job_description,
+#             'job_type': job_type,
+#             'Communication': ans[0],
+#             'Leadership': ans[1],
+#             'Team Work': ans[2],
+#             'Adaptability': ans[3],
+#             'Problem Solving': ans[4],
+#             'Interpersonal Skills': ans[5],
+#             'Loyalty': ans[6]
+#         }
+#
+#         print(job_data)
+#         # Update the user's dictionary in collection1 with the job information
+#         # Make sure the user already exists in collection1
+#         existing_user = collection1.find_one({'username': username})
+#         if existing_user:
+#             collection1.insert_one(job_data)
+
+@app.route('/create_job', methods=['GET', 'POST'])
 def create_job():
+    if request.method == 'POST':
+        # Handle form submission here
         username = request.form.get('userName')  # Get the username from the form
         job_title = request.form.get('job_title')
         job_description = request.form.get('job_description')
-        job_type = request.form.get('job_type')
+        job_type = request.form.get('type')
         # Extract more job information from the form
-        train = pd.read_csv(r'/doc_test.csv')
+        train = pd.read_csv(r'C:\Users\vigne\OneDrive\Desktop\projects\megathon_23\megathon-23\website\doc_test.csv')
 
-        train = pd.read_csv('\doc_test.csv')
 
         train['text'] = train['text'].str.lower()
         train['text'] = train['text'].replace('[^a-zA-Z0-9]', ' ', regex=True)
@@ -77,35 +125,40 @@ def create_job():
         ans = []
         for category in cats:
             X_train, X_test, y_train, y_test = train_test_split(X, train[category], test_size=0.4, random_state = 42)
-        cats = ['communication', 'leadership', 'team_work', 'adaptability', 'problem_solving', 'interpersonal_skill',
-                'loyalty']
-        ans = []
-        for category in cats:
-            X_train, X_test, y_train, y_test = train_test_split(X, train[category], test_size=0.4, random_state=42)
             model = LinearRegression()
             model.fit(X_train, y_train)
             new_job_description = [job_description]
             new_X = vectorizer.transform(new_job_description)
             predicted_scores = model.predict(new_X)
-            ans.append(new_X)
+            ans.append(predicted_scores)
         # Create a dictionary with the job information
         job_data = {
             'job_title': job_title,
             'job_description': job_description,
-            'job_type': job_type,
-            'Communication': ans[0],
-            'Leadership': ans[1],
-            'Team Work': ans[2],
-            'Adaptability': ans[3],
-            'Problem Solving': ans[4],
-            'Interpersonal Skills': ans[5],
-            'Loyalty': ans[6]
+            'Communication' : ans[0],
+            'Leadership' : ans[1],
+            'Team Work' : ans[2],
+            'Adaptability' : ans[3],
+            'Problem Solving' : ans[4],
+            'Interpersonal Skills' : ans[5],
+            'Loyalty' : ans[6]
+
+            # Add more fields for job information as needed
         }
 
-        print(username)
+        print(job_data)
         # Update the user's dictionary in collection1 with the job information
         # Make sure the user already exists in collection1
         existing_user = collection1.find_one({'username': username})
+
+        if existing_user:
+            existing_user['jobs'].append(job_data)  # Assuming 'jobs' is a list field in the user's document
+            collection1.update_one({'username': username}, {'$set': {'jobs': existing_user['jobs']}})
+        else:
+            return 'User does not exist.'  # You can handle this case accordingly
+
+    return render_template("create_job.html")
+
 
 @app.route('/review_applications')
 def review_applications():
@@ -145,20 +198,29 @@ def review_applications():
 @app.route('/<userName>/Jobbee')
 def jobbee_quiz(userName):
     return render_template("jobbee_quiz.html")
+
+@app.route('/submit', methods=['POST'])
 def submit():
+    link = request.form.get('link')
+    dropdown = request.form.get('dropdown')
+    type = request.form.get('type')
+    # add more variables here for the rest of your questions
 
     # create a document with the form data
     document = {
-        'name': temp,
         'link': link,
         'dropdown': dropdown,
+        'type': type,
         'communication': 0,
+        'leadership': 0,
+        'team_work': 0,
+        'adaptability': 0,
+        'problem_solving': 0,
+        'interpersonal_skill': 0,
         'loyalty': 0
     }
 
-    df = pd.read_csv(r"C:\Users\vigne\Downloads\dataset_doc - Sheet1 - Copy.csv")
-    df = pd.read_csv("\dataset_doc - Sheet1 - Copy.csv")
-
+    df = pd.read_csv("https://raw.githubusercontent.com/Proud-Imagination/megathon-23/main/website/dataset_doc%20-%20Sheet1%20-%20Copy.csv")
     for i in range(12):
         for j in range(3):
             qxoy = request.form.get(f'q{i + 1}o{j + 1}')
