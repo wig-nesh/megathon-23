@@ -1,6 +1,5 @@
 flask
-pymongo.mongo_client
-pymongo.server_api
+pymongo
 pandas
 numpy
 scikit-learn
