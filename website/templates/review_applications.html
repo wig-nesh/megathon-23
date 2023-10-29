@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>LinkedIn Profiles</title>
 </head>
 <body>
-
+    {% for data in sorted_data %}
+        <h2>Sorted by Cosine Similarity {{ loop.index }}</h2>
+        <div id="cosine_content_{{ loop.index }}">
+            {% for item in data %}
+                <p><a href="{{ item.links }}">{{ item.type }}</a></p>
+            {% endfor %}
+        </div>
+    {% endfor %}
 </body>
 </html>
