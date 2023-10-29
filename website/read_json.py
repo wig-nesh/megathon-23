@@ -15,7 +15,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template(r'profile.html', name=data['full_name'], work=data["occupation"], imageURL=data['profile_pic_url'], location=(data['city'] + ', ' + data['country']))
+    return render_template(r'profile.html', occupation=data['occupation'], name=data['full_name'], imageURL=data['profile_pic_url'], location=(data['city'] + ', ' + data['country']), experiences=data.get('experiences', []))
 
 if __name__ == '__main__':
     app.run()
