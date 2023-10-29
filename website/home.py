@@ -1,13 +1,12 @@
 from flask import Flask, redirect, url_for, request, render_template
 from pymongo.mongo_client import MongoClient
-from pymongo.server_api import ServerApi
 import pandas as pd
 import numpy as np
 
 uri = "mongodb+srv://vighneshvembaar:3HvgpBVcYXsu3VUM@jobberjobbee.jg4fczh.mongodb.net/?retryWrites=true&w=majority"
 
 app = Flask(__name__)
-client = MongoClient(uri, server_api=ServerApi('1'))  # connect to your MongoDB server
+client = MongoClient(uri)  # connect to your MongoDB server
 db = client['jobberjobbee']  # replace 'your_database' with your database name
 collection = db['responses']  # replace 'your_collection' with your collection name
 try:
