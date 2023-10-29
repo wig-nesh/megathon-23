@@ -7,9 +7,11 @@ import numpy as np
 uri = "mongodb+srv://vighneshvembaar:3HvgpBVcYXsu3VUM@jobberjobbee.jg4fczh.mongodb.net/?retryWrites=true&w=majority"
 
 app = Flask(__name__)
-client = MongoClient(uri, server_api=ServerApi('1'))  # connect to your MongoDB server
+client = MongoClient(uri)  # connect to your MongoDB server
 db = client['jobberjobbee']  # replace 'your_database' with your database name
 collection = db['responses']  # replace 'your_collection' with your collection name
+collection1 = db['jobbers']
+
 try:
     client.admin.command('ping')
     print("Pinged your deployment. You successfully connected to MongoDB!")
@@ -43,21 +45,50 @@ def login_get(accountType, userName):
 
 @app.route('/<userName>/Jobber')
 def jobber_home(userName):
+    existing_user = collection1.find_one({'username': userName})
+    if existing_user is None:
+        new_user_data = {'username': userName, 'jobs': []}
+        collection1.insert_one(new_user_data)
+
     return render_template("jobber_home.html")
 
 
 @app.route('/create_job', methods=['GET', 'POST'])
 def create_job():
     if request.method == 'POST':
-        # handle form submission here
-        pass
+        # Handle form submission here
+        username = request.form.get('userName')  # Get the username from the form
+        job_title = request.form.get('job_title')
+        job_description = request.form.get('job_description')
+        # Extract more job information from the form
+
+        # Create a dictionary with the job information
+        job_data = {
+            'job_title': job_title,
+            'job_description': job_description,
+            # Add more fields for job information as needed
+        }
+        print(job_data)
+        # Update the user's dictionary in collection1 with the job information
+        # Make sure the user already exists in collection1
+        existing_user = collection1.find_one({'username': username})
+
+        if existing_user:
+            existing_user['jobs'].append(job_data)  # Assuming 'jobs' is a list field in the user's document
+            collection1.update_one({'username': username}, {'$set': {'jobs': existing_user['jobs']}})
+        else:
+            return 'User does not exist.'  # You can handle this case accordingly
+
     return render_template("create_job.html")
 
 
 @app.route('/review_applications')
 def review_applications():
     # fetch data from MongoDB and pass to template
-    return render_template("review_applications.html")
+    x = collection.find()
+    for i in x:
+        print(i)
+    return render_template("review_applications.html", applications=i)
 
 
 @app.route('/<userName>/Jobbee')
@@ -118,11 +149,10 @@ def submit():
     # insert the document into the MongoDB collection
     for key, value in document.items():
         if isinstance(value, np.int64):
-            document[key] = int(value)/6
+            document[key] = int(value)/72
     collection.insert_one(document)
 
     return 'Form submitted successfully!'
-
 
 if __name__ == '__main__':
     app.run()
