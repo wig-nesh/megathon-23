@@ -2,9 +2,12 @@ from flask import Flask, redirect, url_for, request, render_template
 from pymongo.mongo_client import MongoClient
 import pandas as pd
 import numpy as np
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
 
 uri = "mongodb+srv://vighneshvembaar:3HvgpBVcYXsu3VUM@jobberjobbee.jg4fczh.mongodb.net/?retryWrites=true&w=majority"
-temp = "hi"
+
 app = Flask(__name__)
 client = MongoClient(uri)  # connect to your MongoDB server
 db = client['jobberjobbee']  # replace 'your_database' with your database name
@@ -44,8 +47,6 @@ def login_get(accountType, userName):
 
 @app.route('/<userName>/Jobber')
 def jobber_home(userName):
-    global temp
-    temp = userName
     existing_user = collection1.find_one({'username': userName})
     if existing_user is None:
         new_user_data = {'username': userName, 'jobs': []}
@@ -58,27 +59,43 @@ def jobber_home(userName):
 def create_job():
     if request.method == 'POST':
         # Handle form submission here
-        username = temp  # Get the username from the form
-        # username = userName
+        username = request.form.get('userName')  # Get the username from the form
         job_title = request.form.get('job_title')
         job_description = request.form.get('job_description')
         # Extract more job information from the form
+        train = pd.read_csv(r'/doc_test.csv')
 
 
-
+        train['text'] = train['text'].str.lower()
+        train['text'] = train['text'].replace('[^a-zA-Z0-9]', ' ', regex=True)
+        vectorizer = TfidfVectorizer()
+        X = vectorizer.fit_transform(train['text'])
+        cats = ['communication', 'leadership', 'team_work', 'adaptability', 'problem_solving', 'interpersonal_skill', 'loyalty']
+        ans = []
+        for category in cats:
+            X_train, X_test, y_train, y_test = train_test_split(X, train[category], test_size=0.4, random_state = 42)
+            model = LinearRegression()
+            model.fit(X_train, y_train)
+            new_job_description = [job_description]
+            new_X = vectorizer.transform(new_job_description)
+            predicted_scores = model.predict(new_X)
+            ans.append(new_X)
         # Create a dictionary with the job information
         job_data = {
             'job_title': job_title,
             'job_description': job_description,
-            'communication': 0,
-            'leadership': 0,
-            'team_work': 0,
-            'adaptability': 0,
-            'problem_solving': 0,
-            'interpersonal_skill': 0,
-            'loyalty': 0
+            'Communication' : ans[0],
+            'Leadership' : ans[1],
+            'Team Work' : ans[2],
+            'Adaptability' : ans[3],
+            'Problem Solving' : ans[4],
+            'Interpersonal Skills' : ans[5],
+            'Loyalty' : ans[6]
+
+            # Add more fields for job information as needed
         }
-        print(username)
+
+        print(job_data)
         # Update the user's dictionary in collection1 with the job information
         # Make sure the user already exists in collection1
         existing_user = collection1.find_one({'username': username})
@@ -86,7 +103,6 @@ def create_job():
         if existing_user:
             existing_user['jobs'].append(job_data)  # Assuming 'jobs' is a list field in the user's document
             collection1.update_one({'username': username}, {'$set': {'jobs': existing_user['jobs']}})
-            return 'Job has been added!'
         else:
             return 'User does not exist.'  # You can handle this case accordingly
 
@@ -96,10 +112,9 @@ def create_job():
 @app.route('/review_applications')
 def review_applications():
     # fetch data from MongoDB and pass to template
-    x = collection1.find()
+    x = collection.find()
     for i in x:
-        if i['username'] == temp:
-            print(i)
+        print(i)
     return render_template("review_applications.html", applications=i)
 
 
