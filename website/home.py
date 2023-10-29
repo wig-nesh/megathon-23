@@ -64,7 +64,7 @@ def create_job():
         job_description = request.form.get('job_description')
         # Extract more job information from the form
 
-        
+
 
         # Create a dictionary with the job information
         job_data = {
@@ -86,6 +86,7 @@ def create_job():
         if existing_user:
             existing_user['jobs'].append(job_data)  # Assuming 'jobs' is a list field in the user's document
             collection1.update_one({'username': username}, {'$set': {'jobs': existing_user['jobs']}})
+            return 'Job has been added!'
         else:
             return 'User does not exist.'  # You can handle this case accordingly
 
