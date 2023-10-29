@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 
 uri = "mongodb+srv://vighneshvembaar:3HvgpBVcYXsu3VUM@jobberjobbee.jg4fczh.mongodb.net/?retryWrites=true&w=majority"
-
+temp = "hi"
 app = Flask(__name__)
 client = MongoClient(uri)  # connect to your MongoDB server
 db = client['jobberjobbee']  # replace 'your_database' with your database name
@@ -44,6 +44,8 @@ def login_get(accountType, userName):
 
 @app.route('/<userName>/Jobber')
 def jobber_home(userName):
+    global temp
+    temp = userName
     existing_user = collection1.find_one({'username': userName})
     if existing_user is None:
         new_user_data = {'username': userName, 'jobs': []}
@@ -56,18 +58,27 @@ def jobber_home(userName):
 def create_job():
     if request.method == 'POST':
         # Handle form submission here
-        username = request.form.get('userName')  # Get the username from the form
+        username = temp  # Get the username from the form
+        # username = userName
         job_title = request.form.get('job_title')
         job_description = request.form.get('job_description')
         # Extract more job information from the form
+
+        
 
         # Create a dictionary with the job information
         job_data = {
             'job_title': job_title,
             'job_description': job_description,
-            # Add more fields for job information as needed
+            'communication': 0,
+            'leadership': 0,
+            'team_work': 0,
+            'adaptability': 0,
+            'problem_solving': 0,
+            'interpersonal_skill': 0,
+            'loyalty': 0
         }
-        print(job_data)
+        print(username)
         # Update the user's dictionary in collection1 with the job information
         # Make sure the user already exists in collection1
         existing_user = collection1.find_one({'username': username})
@@ -84,9 +95,10 @@ def create_job():
 @app.route('/review_applications')
 def review_applications():
     # fetch data from MongoDB and pass to template
-    x = collection.find()
+    x = collection1.find()
     for i in x:
-        print(i)
+        if i['username'] == temp:
+            print(i)
     return render_template("review_applications.html", applications=i)
 
 
