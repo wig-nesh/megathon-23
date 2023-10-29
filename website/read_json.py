@@ -40,7 +40,7 @@ def index():
     if rating is not None:
         skills.append(f"Codeforces Rating: {rating}")
 
-    return render_template(r'profile.html', occupation=data['occupation'], name=data['full_name'], imageURL=data['profile_pic_url'], location=(data['city'] + ', ' + data['country']), skills=skills, experiences=data.get('experiences', []), education=data.get('education', []))
+    return render_template(r'profile.html', occupation=data['occupation'], name=data['full_name'], imageURL=data['profile_pic_url'], location=(data['city'] + ', ' + data['country']), skills=skills, languages=data.get('languages', []), experiences=data.get('experiences', []), education=data.get('education', []))
 
 if __name__ == '__main__':
     app.run()
