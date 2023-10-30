@@ -6,5 +6,5 @@ Download or clone repo
 Run:
 ```
 pip install -r requirements.txt
-python home.py
+python website/home.py
 ```
