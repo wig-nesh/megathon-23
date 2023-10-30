@@ -30,6 +30,7 @@ except Exception as e:
 def home():
     return render_template("login.html")
 
+
 @app.route('/login', methods=['POST'])
 def login_post():
     username = request.form.get('username')
@@ -39,6 +40,7 @@ def login_post():
     elif accountType == '1':
         accountType = 'Jobbee'
     return redirect(url_for('login_get', userName=username, accountType=accountType))
+
 
 @app.route('/login/<userName>/<accountType>')
 def login_get(accountType, userName):
@@ -58,6 +60,7 @@ def jobber_home(userName):
         collection1.insert_one(new_user_data)
 
     return render_template("jobber_home.html")
+
 
 # @app.route('/create_job')
 # def create_job():
@@ -112,19 +115,19 @@ def create_job():
         username = temp  # Get the username from the form
         job_title = request.form.get('job_title')
         job_description = request.form.get('job_description')
-        job_type = request.form.get('type')
+        job_type = request.form.get('types')
         # Extract more job information from the form
         train = pd.read_csv(r'C:\Users\vigne\OneDrive\Desktop\projects\megathon_23\megathon-23\website\doc_test.csv')
-
 
         train['text'] = train['text'].str.lower()
         train['text'] = train['text'].replace('[^a-zA-Z0-9]', ' ', regex=True)
         vectorizer = TfidfVectorizer()
         X = vectorizer.fit_transform(train['text'])
-        cats = ['communication', 'leadership', 'team_work', 'adaptability', 'problem_solving', 'interpersonal_skill', 'loyalty']
+        cats = ['communication', 'leadership', 'team_work', 'adaptability', 'problem_solving', 'interpersonal_skill',
+                'loyalty']
         ans = []
         for category in cats:
-            X_train, X_test, y_train, y_test = train_test_split(X, train[category], test_size=0.4, random_state = 42)
+            X_train, X_test, y_train, y_test = train_test_split(X, train[category], test_size=0.4, random_state=42)
             model = LinearRegression()
             model.fit(X_train, y_train)
             new_job_description = [job_description]
@@ -136,13 +139,14 @@ def create_job():
         job_data = {
             'job_title': job_title,
             'job_description': job_description,
-            'Communication' : ans[0][0],
-            'Leadership' : ans[1][0],
-            'Team Work' : ans[2][0],
-            'Adaptability' : ans[3][0],
-            'Problem Solving' : ans[4][0],
-            'Interpersonal Skills' : ans[5][0],
-            'Loyalty' : ans[6][0]
+            'job_type': job_type,
+            'Communication': ans[0][0],
+            'Leadership': ans[1][0],
+            'Team Work': ans[2][0],
+            'Adaptability': ans[3][0],
+            'Problem Solving': ans[4][0],
+            'Interpersonal Skills': ans[5][0],
+            'Loyalty': ans[6][0]
 
             # Add more fields for job information as needed
         }
@@ -167,20 +171,24 @@ def review_applications():
     y = collection1.find()  # jobber
     X = []
     Y = []
+    jobList = []
     outputs = []
     for i in y:
         if i['username'] == temp:
-            for l in i['jobs']:
-                X.append([l['Communication'], l['Leadership'], l['Team Work'], l['Adaptability'], l['Problem Solving'],
-                          l['Interpersonal Skills'], l['Loyalty']])
+            # print(i)
+            for b in i['jobs']:
+                jobList.append(b['job_title'])
+                X.append([b['Communication'], b['Leadership'], b['Team Work'], b['Adaptability'], b['Problem Solving'],
+                          b['Interpersonal Skills'], b['Loyalty']])
     for i in x:
-        print(i)
+        # print(i)
         a = [i['communication'], i['leadership'], i['team_work'], i['adaptability'], i['problem_solving'],
              i['interpersonal_skill'], i['loyalty']]
         b = []
         for k in X:
             b.append(np.dot(k, a) / (norm(k) * norm(a)))
         outputs.append({'cosine': b,
+                        'jobs': jobList,
                         'links': i['link'],
                         'type': i['dropdown'],
                         'name': i['name']})
@@ -191,7 +199,7 @@ def review_applications():
         # Sort by i-th cosine similarity
         outputs.sort(key=lambda w: w['cosine'][i], reverse=True)
         sorted_data.append(outputs.copy())
-    # print(sorted_data)
+    print(sorted_data)
 
     # return sorted_data
     return render_template("review_applications.html", sorted_data=sorted_data)
@@ -200,6 +208,7 @@ def review_applications():
 @app.route('/<userName>/Jobbee')
 def jobbee_quiz(userName):
     return render_template("jobbee_quiz.html", userName=userName)
+
 
 @app.route('/submit', methods=['POST'])
 def submit():
@@ -222,7 +231,8 @@ def submit():
         'loyalty': 0
     }
 
-    df = pd.read_csv("https://raw.githubusercontent.com/Proud-Imagination/megathon-23/main/website/dataset_doc%20-%20Sheet1%20-%20Copy.csv")
+    df = pd.read_csv(
+        "https://raw.githubusercontent.com/Proud-Imagination/megathon-23/main/website/dataset_doc%20-%20Sheet1%20-%20Copy.csv")
     for i in range(12):
         for j in range(3):
             qxoy = request.form.get(f'q{i + 1}o{j + 1}')
@@ -251,11 +261,10 @@ def submit():
                 document['interpersonal_skill'] += df['interpersonal_skill'][(i * 3) + j]
                 document['loyalty'] += df['loyalty'][(i * 3) + j]
 
-
     # insert the document into the MongoDB collection
     for key, value in document.items():
         if isinstance(value, np.int64):
-            document[key] = int(value)/72
+            document[key] = int(value) / 72
     collection.insert_one(document)
 
     return 'Form submitted successfully!'

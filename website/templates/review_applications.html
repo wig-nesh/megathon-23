@@ -5,7 +5,7 @@
 </head>
 <body>
     {% for data in sorted_data %}
-        <h2>Job {{ loop.index }}</h2>
+        <h2>{{ jobList[loop.index0] }}</h2>
         <div id="cosine_content_{{ loop.index }}">
             {% for item in data %}
                 <p><a href="{{ item.links }}">{{ item.name }}</a></p>
